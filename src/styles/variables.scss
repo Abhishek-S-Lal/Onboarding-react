@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Inter");
+
+$font-primary: "Inter", sans-serif;
+$font-secondary: "Lato", sans-serif;
+
+// A map of breakpoints.
+$breakpoints: (
+  xs: 0,
+  xsm: 360px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);

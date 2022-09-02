@@ -1,0 +1,90 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.onboarding-container {
+    @include flex-col-vertical-center;
+    margin-top: 1.5rem;
+    max-width: 555px;
+    padding: 2rem;
+
+    &__header {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__stepper {
+        margin-top: 3.5rem;
+        padding: 0 3rem;
+        @include respond-below(md) {
+            padding: 0;
+        }
+    }
+
+    &__content {
+        margin-top: 4rem;
+
+        &__header {
+            @include flex-col-horizontal-center();
+            h3 {
+                font-weight: 700;
+                // font-size: 2rem;
+                text-align: center;
+            }
+            h6 {
+                color: #6a768e;
+                font-weight: 600;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+
+            @include respond-below(md) {
+                align-items: flex-start;
+            }
+
+            &__tickicon {
+                font-weight: 500;
+                font-size: 1rem;
+                border: 1px solid #eaeef5;
+                border-radius: 50%;
+                background-color: #ffffff;
+                height: fit-content;
+                color: #000;
+                --size: 3.5rem;
+                width: var(--size);
+                height: var(--size);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 30;
+                border: 1px solid #664de5;
+                color: #ffffff;
+                background-color: #664de5;
+            }
+        }
+
+        &__form {
+            margin-top: 2rem;
+            padding: 0 2rem;
+
+            @include respond-below(md) {
+                padding: 0 0;
+            }
+
+            .selection-cards {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 2rem;
+
+                @include respond-below(md) {
+                    flex-direction: column-reverse;
+                }
+            }
+        }
+    }
+
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+}

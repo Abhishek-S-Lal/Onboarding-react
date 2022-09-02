@@ -1,0 +1,170 @@
+@import "../styles/variables.scss";
+
+@mixin abs-size($left: 0, $top: 0, $width: auto, $height: auto) {
+    position: absolute;
+    left: $left;
+    top: $top;
+    width: $width;
+    height: $height;
+  }
+
+@mixin flex-row() {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-row-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-row-vertical-center() {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-row-horizontal-center() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-row-stretch() {
+  display: flex;
+  justify-content: stretch;
+}
+
+@mixin flex-col() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-col-center() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-col-vertical-center() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin flex-col-horizontal-center() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-col-stretch() {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@mixin flex-wrap() {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin font($size: inherit, $weight: normal, $line-height: normal) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+}
+
+@mixin font-secondary($size: inherit, $weight: normal, $line-height: normal) {
+  font-family: $font-secondary;
+  @include font($size, $weight, $line-height);
+}
+
+@mixin font-primary($size: inherit, $weight: normal, $line-height: normal) {
+  font-family: $font-primary;
+  @include font($size, $weight, $line-height);
+}
+
+//For Controlling Media Query
+@mixin query($display) {
+  @each $key, $value in $bp {
+    @if ($display==$key) {
+      @media (max-width: ($value - 1)) {
+        @content;
+      }
+    }
+  }
+}
+
+// @include respond-above(sm) {}
+@mixin respond-above($breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+
+    // If the breakpoint doesn't exist in the map.
+  } @else {
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// @include respond-below(sm) {}
+@mixin respond-below($breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+
+    // If the breakpoint doesn't exist in the map.
+  } @else {
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// @include respond-between(sm, md) {}
+@mixin respond-between($lower, $upper) {
+  // If both the lower and upper breakpoints exist in the map.
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    // Get the lower and upper breakpoints.
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+
+    // Write the media query.
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+
+    // If one or both of the breakpoints don't exist.
+  } @else {
+    // If lower breakpoint is invalid.
+    @if (map-has-key($breakpoints, $lower) == false) {
+      // Log a warning.
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    // If upper breakpoint is invalid.
+    @if (map-has-key($breakpoints, $upper) == false) {
+      // Log a warning.
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}

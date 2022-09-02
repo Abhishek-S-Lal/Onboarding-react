@@ -1,0 +1,77 @@
+@import "../../styles/colors.scss";
+
+.c-stepper {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+
+        &-completed {
+            &:before {
+                content: "";
+                position: relative;
+                top: 26px;
+                background-color: $primary-color;
+                height: 2px;
+                order: -1;
+                align-self: normal;
+            }
+
+            &:first-child::before{
+                margin-left: 50%;
+            }
+
+            &:last-child::before{
+                margin-right: 50%;
+            }
+        }
+
+        &-pending{
+            &:before {
+                content: "";
+                position: relative;
+                top: 26px;
+                background-color: #eaeef5;
+                height: 2px;
+                order: -1;
+                align-self: normal;
+            }
+
+            &:first-child::before{
+                margin-left: 50%;
+            }
+    
+            &:last-child::before{
+                margin-right: 50%;
+            }
+        }       
+    }
+
+    &__stepnumber {
+        font-weight: 500;
+        font-size: 1rem;
+        border: 1px solid #eaeef5;
+        border-radius: 50%;
+        background-color: #ffffff;
+        height: fit-content;
+        color: #000;
+        --size: 2.5rem;
+        width: var(--size);
+        height: var(--size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 30;
+
+        &-completed {
+            border: 1px solid #664de5;
+            color: #ffffff;
+            background-color: #664de5;
+        }
+    }
+}
